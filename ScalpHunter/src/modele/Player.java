@@ -12,32 +12,20 @@ import java.util.ArrayList;
  * @author Théophile
  */
 public abstract class Player {
-
+    // attributs
     private int health;
     private int resources;
     private ArrayList<Card> deck;
 
+    // constructeur
+
     public Player(ArrayList<Card> deck) {
-        health = 10;
-        resources = 0;
+        this.health = 10;
+        this.resources = 0;
         this.deck = deck;
     }
-
-    public MoveSommon Sommon() {
-        //TODO
-        return null;
-    }
-
-    public MoveAttack PlayAttack() {
-        //TODO
-        return null;
-    }
-
-    public MoveDefense PlayDefense(ArrayList<MoveAttack> attacks) {
-        //TODO
-        return null;
-    }
-
+    
+    // getters et setters
     public int getHealth() {
         return health;
     }
@@ -61,7 +49,20 @@ public abstract class Player {
     public void setDeck(ArrayList<Card> deck) {
         this.deck = deck;
     }
-    
-    
 
+    // fonctions
+    public MoveSommon Sommon() {
+        //TODO
+        return null;
+    }
+
+    public MoveAttack PlayAttack() {
+        //TODO
+        return null;
+    }
+
+    public MoveDefense PlayDefense(ArrayList<MoveAttack> attacks) {
+        //TODO
+        return null;
+    }
 }
