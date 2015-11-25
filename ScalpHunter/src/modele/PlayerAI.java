@@ -5,13 +5,15 @@
  */
 package modele;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Théophile
  */
 public class PlayerAI extends Player {
 
-    public PlayerAI(Card[] deck) {
+    public PlayerAI(ArrayList<Card> deck) {
         super(deck);
     }
 

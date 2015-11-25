@@ -5,22 +5,52 @@
  */
 package modele;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Théophile
  */
 public abstract class Player {
-
+    // attributs
     private int health;
     private int resources;
-    private Card[] deck;
+    private ArrayList<Card> deck;
 
-    public Player(Card[] deck) {
-        health = 10;
-        resources = 0;
+    // constructeur
+
+    public Player(ArrayList<Card> deck) {
+        this.health = 10;
+        this.resources = 0;
+        this.deck = deck;
+    }
+    
+    // getters et setters
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getResources() {
+        return resources;
+    }
+
+    public void setResources(int resources) {
+        this.resources = resources;
+    }
+
+    public ArrayList<Card> getDeck() {
+        return deck;
+    }
+
+    public void setDeck(ArrayList<Card> deck) {
         this.deck = deck;
     }
 
+    // fonctions
     public MoveSommon Sommon() {
         //TODO
         return null;

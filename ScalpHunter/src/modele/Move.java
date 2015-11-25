@@ -10,7 +10,24 @@ package modele;
  * @author Théophile
  */
 public abstract class Move {
+    // attributs
+    private Game current;
 
-    public abstract void action(Player p); // TODO modifier le diagramme de classe (ajout parametre p)
+    // constructeur
+    public Move(Game current) {
+        this.current = current;
+    }
+
+    // getters et setters
+    public Game getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Game current) {
+        this.current = current;
+    }
+    
+    // fonctions
+    public abstract void action(Card c, Player p); // TODO modifier le diagramme de classe (ajout parametre p)
     
 }

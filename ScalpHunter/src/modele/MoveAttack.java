@@ -11,8 +11,12 @@ package modele;
  */
 public class MoveAttack extends Move {
 
+    public MoveAttack(Game current) {
+        super(current);
+    }
+
     @Override
-    public void action(Player p) {
+    public void action(Card c, Player p) {
         
     }
 
