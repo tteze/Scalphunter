@@ -9,7 +9,8 @@ package modele;
  *
  * @author Théophile
  */
-public class Minion extends Card{
+public class Minion extends Card {
+
     private int attack;
     private int defense;
 
@@ -18,9 +19,9 @@ public class Minion extends Card{
         this.attack = attack;
         this.defense = defense;
     }
-    
-    public void Fight(Minion opponent){
+
+    public void Fight(Minion opponent) {
         //TODO
     }
-    
+
 }

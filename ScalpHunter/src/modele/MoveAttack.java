@@ -9,6 +9,6 @@ package modele;
  *
  * @author Théophile
  */
-public class MoveAttack extends Move{
-    
+public class MoveAttack extends Move {
+
 }

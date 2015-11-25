@@ -10,30 +10,30 @@ package modele;
  * @author Théophile
  */
 public abstract class Player {
+
     private int health;
     private int resources;
     private Card[] deck;
-    
+
     public Player(Card[] deck) {
-        health=10;
-        resources=0;
-        this.deck=deck;
+        health = 10;
+        resources = 0;
+        this.deck = deck;
     }
-    
-    public MoveSommon Sommon(){
+
+    public MoveSommon Sommon() {
         //TODO
         return null;
     }
-    
-    public MoveAttack PlayAttack(){
+
+    public MoveAttack PlayAttack() {
         //TODO
         return null;
     }
-    
-    public MoveDefense PlayDefense(){
+
+    public MoveDefense PlayDefense() {
         //TODO
         return null;
     }
-    
-    
+
 }

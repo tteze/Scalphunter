@@ -9,10 +9,10 @@ package modele;
  *
  * @author Théophile
  */
-public class PlayerHuman extends Player{
+public class PlayerHuman extends Player {
 
     public PlayerHuman(Card[] deck) {
         super(deck);
     }
-    
+
 }

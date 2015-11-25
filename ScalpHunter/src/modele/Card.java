@@ -10,6 +10,7 @@ package modele;
  * @author Théophile
  */
 public abstract class Card {
+
     private String name;
     private int cost;
 

@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author Théophile
  */
 public class Game {
+
     private Player player1;
     private Player player2;
     private boolean current_player;
@@ -20,37 +21,36 @@ public class Game {
     public Game(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
-        this.current_player=false;
-        board=new Board();
+        this.current_player = false;
+        board = new Board();
     }
-    
-    private Player isEnd(){
+
+    private Player isEnd() {
         //TODO
         return null;
     }
-    
-    private Player nextPlayer(){
+
+    private Player nextPlayer() {
         //TODO
         return null;
     }
-    
-    private void sommonRound(){
+
+    private void sommonRound() {
         //TODO
     }
-    
-    private ArrayList<MoveAttack> attackRound(){
-        //TODO
-        return null;
-    }
-    
-    private void defenseRound(ArrayList<MoveAttack> attacks){
-        //TODO
-    }
-    
-    public Player play(){
+
+    private ArrayList<MoveAttack> attackRound() {
         //TODO
         return null;
     }
-    
-    
+
+    private void defenseRound(ArrayList<MoveAttack> attacks) {
+        //TODO
+    }
+
+    public Player play() {
+        //TODO
+        return null;
+    }
+
 }
