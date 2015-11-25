@@ -5,6 +5,8 @@
  */
 package modele;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Théophile
@@ -31,9 +33,35 @@ public abstract class Player {
         return null;
     }
 
-    public MoveDefense PlayDefense() {
+    public MoveDefense PlayDefense(ArrayList<MoveAttack> attacks) {
         //TODO
         return null;
     }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getResources() {
+        return resources;
+    }
+
+    public void setResources(int resources) {
+        this.resources = resources;
+    }
+
+    public Card[] getDeck() {
+        return deck;
+    }
+
+    public void setDeck(Card[] deck) {
+        this.deck = deck;
+    }
+    
+    
 
 }

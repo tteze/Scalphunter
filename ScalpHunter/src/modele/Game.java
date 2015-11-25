@@ -28,26 +28,44 @@ public class Game {
     }
 
     private Player isEnd() {
-        //TODO
+        if(this.player1.getHealth()<=0)
+            return this.player1;
+        else if(this.player2.getHealth()<=0)
+            return this.player2;
         return null;
     }
 
     private Player nextPlayer() {
-        //TODO
-        return null;
+        if(this.current_player){
+            this.current_player=false;
+            return this.player1;
+        }
+        this.current_player=true;
+        return this.player2;
     }
 
-    private void sommonRound() {
-        //TODO
+    private void sommonRound(Player player) {
+        MoveSommon s=null;
+        while((s=player.Sommon())!=null){
+            this.board.applyMove(s);
+        }
     }
 
-    private ArrayList<MoveAttack> attackRound() {
-        //TODO
-        return null;
+    private ArrayList<MoveAttack> attackRound(Player player) {
+        ArrayList<MoveAttack> list_attack = null;
+        MoveAttack a=null;
+        while((a=player.PlayAttack())!=null){
+            this.board.applyMove(a);
+            list_attack.add(a);
+        }
+        return list_attack;
     }
 
-    private void defenseRound(ArrayList<MoveAttack> attacks) {
-        //TODO
+    private void defenseRound(Player player, ArrayList<MoveAttack> attacks) {
+        MoveDefense d=null;
+        while((d=player.PlayDefense(attacks))!=null){
+            this.board.applyMove(d);
+        }
     }
 
     public Player play() {
