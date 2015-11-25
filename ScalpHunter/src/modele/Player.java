@@ -15,9 +15,9 @@ public abstract class Player {
 
     private int health;
     private int resources;
-    private Card[] deck;
+    private ArrayList<Card> deck;
 
-    public Player(Card[] deck) {
+    public Player(ArrayList<Card> deck) {
         health = 10;
         resources = 0;
         this.deck = deck;
@@ -54,11 +54,11 @@ public abstract class Player {
         this.resources = resources;
     }
 
-    public Card[] getDeck() {
+    public ArrayList<Card> getDeck() {
         return deck;
     }
 
-    public void setDeck(Card[] deck) {
+    public void setDeck(ArrayList<Card> deck) {
         this.deck = deck;
     }
     
