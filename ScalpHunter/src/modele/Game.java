@@ -29,9 +29,9 @@ public class Game {
 
     private Player isEnd() {
         if(this.player1.getHealth()<=0)
-            return this.player1;
-        else if(this.player2.getHealth()<=0)
             return this.player2;
+        else if(this.player2.getHealth()<=0)
+            return this.player1;
         return null;
     }
 
@@ -62,15 +62,26 @@ public class Game {
     }
 
     private void defenseRound(Player player, ArrayList<MoveAttack> attacks) {
-        MoveDefense d=null;
-        while((d=player.PlayDefense(attacks))!=null){
-            this.board.applyMove(d);
+        if(attacks!=null){
+            MoveDefense d=null;
+            while((d=player.PlayDefense(attacks))!=null){
+                this.board.applyMove(d);
+            }
         }
     }
 
     public Player play() {
-        //TODO
-        return null;
+        Player winner=null;
+        Player player;
+        ArrayList<MoveAttack> attacks=null;
+        for(int i=2;(winner=this.isEnd())==null;i++){
+            player=nextPlayer();
+            this.defenseRound(player, attacks);
+            player.setResources(player.getResources()+i/2);
+            this.sommonRound(player);
+            attacks=this.attackRound(player);
+        }
+        return winner;
     }
 
 }
