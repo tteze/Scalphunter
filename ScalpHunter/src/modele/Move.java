@@ -11,4 +11,6 @@ package modele;
  */
 public abstract class Move {
 
+    public abstract void action(Player p); // TODO modifier le diagramme de classe (ajout parametre p)
+    
 }

@@ -11,4 +11,9 @@ package modele;
  */
 public class MoveAttack extends Move {
 
+    @Override
+    public void action(Player p) {
+        
+    }
+
 }

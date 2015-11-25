@@ -10,5 +10,10 @@ package modele;
  * @author Théophile
  */
 public class MoveDefense extends Move{
+
+    @Override
+    public void action(Player p) {
+        
+    }
     
 }
