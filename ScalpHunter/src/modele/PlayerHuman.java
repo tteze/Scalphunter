@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class PlayerHuman extends Player {
 
-    public PlayerHuman(ArrayList<Card> deck) {
-        super(deck);
+    public PlayerHuman(ArrayList<Card> deck, int id) {
+        super(deck, id);
     }
 
 }

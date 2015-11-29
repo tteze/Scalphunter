@@ -12,19 +12,21 @@ import java.util.ArrayList;
  * @author Théophile
  */
 public abstract class Player {
+
     // attributs
+    private int id;
     private int health;
     private int resources;
     private ArrayList<Card> deck;
 
     // constructeur
-
-    public Player(ArrayList<Card> deck) {
+    public Player(ArrayList<Card> deck, int id) {
+        this.id = id;
         this.health = 10;
         this.resources = 0;
         this.deck = deck;
     }
-    
+
     // getters et setters
     public int getHealth() {
         return health;
@@ -50,6 +52,15 @@ public abstract class Player {
         this.deck = deck;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+
     // fonctions
     public MoveSommon Sommon() {
         //TODO
@@ -65,31 +76,4 @@ public abstract class Player {
         //TODO
         return null;
     }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getResources() {
-        return resources;
-    }
-
-    public void setResources(int resources) {
-        this.resources = resources;
-    }
-
-    public Card[] getDeck() {
-        return deck;
-    }
-
-    public void setDeck(Card[] deck) {
-        this.deck = deck;
-    }
-    
-    
-
 }

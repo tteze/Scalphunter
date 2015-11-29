@@ -9,15 +9,17 @@ package modele;
  *
  * @author Théophile
  */
-public class MoveDefense extends Move{
+public class MoveDefense extends Move {
 
+    //constructeur
     public MoveDefense(Game current) {
         super(current);
     }
 
+    // fonctions
     @Override
     public void action(Card c, Player p) {
-        
+
     }
-    
+
 }
