@@ -9,7 +9,8 @@ package modele;
  *
  * @author Théophile
  */
-public class MoveSommon extends Move{
+public class MoveSommon extends Move {
+
     // constructeur
     public MoveSommon(Game current) {
         super(current);
