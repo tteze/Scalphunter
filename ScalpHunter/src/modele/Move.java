@@ -10,9 +10,6 @@ package modele;
  * @author Théophile
  */
 public abstract class Move {
-    // attributs
-    private Game current;
-
     // constructeur
     public Move(Game current) {
         this.current = current;
