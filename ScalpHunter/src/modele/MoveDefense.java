@@ -9,7 +9,7 @@ package modele;
  *
  * @author Théophile
  */
-public class MoveDefense extends Move{
+public class MoveDefense extends Move {
 
     public MoveDefense(Game current) {
         super(current);
@@ -19,5 +19,5 @@ public class MoveDefense extends Move{
     public void action(Card c, Player p) {
         
     }
-    
+
 }
