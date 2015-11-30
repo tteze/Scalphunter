@@ -62,10 +62,7 @@ public abstract class Player {
     
 
     // fonctions
-    public MoveSommon Sommon() {
-        //TODO
-        return null;
-    }
+    public abstract MoveSommon Sommon();
 
     public abstract MoveAttack PlayAttack();
 
