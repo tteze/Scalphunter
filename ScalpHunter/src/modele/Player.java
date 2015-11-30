@@ -67,13 +67,7 @@ public abstract class Player {
         return null;
     }
 
-    public MoveAttack PlayAttack() {
-        //TODO
-        return null;
-    }
+    public abstract MoveAttack PlayAttack();
 
-    public MoveDefense PlayDefense(ArrayList<MoveAttack> attacks) {
-        //TODO
-        return null;
-    }
+    public abstract MoveDefense PlayDefense(ArrayList<MoveAttack> attacks);
 }

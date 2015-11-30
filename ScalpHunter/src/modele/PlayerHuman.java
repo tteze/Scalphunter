@@ -17,4 +17,14 @@ public class PlayerHuman extends Player {
         super(deck, id);
     }
 
+    @Override
+    public MoveAttack PlayAttack() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public MoveDefense PlayDefense(ArrayList<MoveAttack> attacks) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
