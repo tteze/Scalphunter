@@ -13,6 +13,9 @@ public abstract class Move {
     // attributs
     private Game current;
 
+    // attributs
+    private Game current;
+
     // constructeur
     public Move(Game current) {
         this.current = current;
