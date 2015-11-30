@@ -54,12 +54,4 @@ public class MoveSommon extends Move{
         p.setResources(0);
     }
 
-    private int myHand(Player p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private int myGround(Player p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

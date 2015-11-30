@@ -26,8 +26,23 @@ public abstract class Move {
     public void setCurrent(Game current) {
         this.current = current;
     }
-    
+
     // fonctions
     public abstract void action(Card c, Player p); // TODO modifier le diagramme de classe (ajout parametre p)
-    
+
+    public int myHand(Player p) {
+        if (p.getId() == 1) {
+            return 0;
+        } else {
+            return 5;
+        }
+    }
+
+    public int myGround(Player p) {
+        if (p.getId() == 1) {
+            return 1;
+        } else {
+            return 4;
+        }
+    }
 }
