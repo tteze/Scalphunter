@@ -110,11 +110,9 @@ public class Game {
     }
 
     private void defenseRound(Player player, ArrayList<MoveAttack> attacks) {
-        if(attacks!=null){
-            MoveDefense d=null;
-            while((d=player.PlayDefense(attacks))!=null){
-                this.board_game.applyMove(d);
-            }
+        MoveDefense d = null;
+        while ((d = player.PlayDefense(attacks)) != null) {
+            this.board_game.applyMove(d);
         }
     }
 
