@@ -13,15 +13,27 @@ public class Minion extends Card {
 
     private int attack;
     private int defense;
+    private boolean tired;
 
     public Minion(String name, int cost, int attack, int defense) {
         super(name, cost);
         this.attack = attack;
         this.defense = defense;
+        this.tired=false;
     }
 
     public void Fight(Minion opponent) {
         //TODO
     }
+
+    public boolean isTired() {
+        return tired;
+    }
+
+    public void setTired(boolean tired) {
+        this.tired = tired;
+    }
+    
+    
 
 }

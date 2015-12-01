@@ -12,35 +12,44 @@ package modele;
 public abstract class Move {
 
     // attributs
-    private Game current;
+    Card card;
+    Player player;
 
     // constructeur
-    public Move(Game current) {
-        this.current = current;
+
+    public Move(Card card, Player player) {
+        this.card = card;
+        this.player = player;
+    }
+    public Card getCard() {    
+        return card;
+    } 
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     // getters et setters
-    public Game getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(Game current) {
-        this.current = current;
+    public void setPlayer(Player player) {    
+        this.player = player;
     }
 
     // fonctions
-    public abstract void action(Card c, Player p); // TODO modifier le diagramme de classe (ajout parametre p)
 
-    public int myHand(Player p) {
-        if (p.getId() == 1) {
+    public int myHand() {
+        if (this.player.getId() == 1) {
             return 0;
         } else {
             return 5;
         }
     }
 
-    public int myGround(Player p) {
-        if (p.getId() == 1) {
+    public int myGround() {
+        if (this.player.getId() == 1) {
             return 1;
         } else {
             return 4;

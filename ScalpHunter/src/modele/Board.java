@@ -50,7 +50,32 @@ public class Board {
 
     // fonctions
     public void applyMove(Move move) {
-        //TODO
+        if(move.getClass()==MoveSommon.class){
+            
+        if (move.getPlayer().getResources() >= move.getCard().getCost()) {
+            for (int i = 0; i < this.getX(); i++) {
+                if (move.getCard() == this.getBoard(i, move.myHand())) {
+                    for (int j = 0; j < this.getX(); j++) {
+                        /*  on regarde si il y a une place disponible sur le terrain
+                        */
+                        if (this.getBoard(j, move.myGround()) == null) {
+                            /*  Cette carte passe de la ligne main à la ligne terrain
+                            et le joueur perd le nombre de ressources correspondant
+                            au coût de la carte.
+                            */
+                            this.setBoard(i, move.myHand(), null);
+                            this.setBoard(j, move.myGround(), move.getCard());
+                            move.getPlayer().setResources(move.getPlayer().getResources() - move.getCard().getCost());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        }else if(move.getClass()== MoveAttack.class){
+        
+        }else if(move.getClass()== MoveDefense.class){
+        
+        }
     }
-
 }

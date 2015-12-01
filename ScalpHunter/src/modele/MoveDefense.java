@@ -12,14 +12,12 @@ package modele;
 public class MoveDefense extends Move {
 
     //constructeur
-    public MoveDefense(Game current) {
-        super(current);
+    public MoveDefense(Card card, Player player) {
+        super(card, player);
+
     }
 
     // fonctions
-    @Override
-    public void action(Card c, Player p) {
-
-    }
+    
 
 }

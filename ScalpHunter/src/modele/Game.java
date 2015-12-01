@@ -120,10 +120,11 @@ public class Game {
         Player winner=null;
         Player player;
         ArrayList<MoveAttack> attacks=null;
-        for(int i=2;(winner=this.isEnd())==null;i++){
+        for(int i=1;(winner=this.isEnd())==null;i++){
+            this.setRound((int)i/2);
             player=nextPlayer();
             this.defenseRound(player, attacks);
-            player.setResources(player.getResources()+i/2);
+            player.setResources(player.getResources() + this.getRound());
             this.sommonRound(player);
             attacks=this.attackRound(player);
         }
