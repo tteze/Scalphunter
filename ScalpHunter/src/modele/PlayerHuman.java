@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * @author Théophile
  */
 public class PlayerHuman extends Player {
-
     public PlayerHuman(ArrayList<Card> deck, int id) {
         super(deck, id);
     }

@@ -16,10 +16,20 @@ public class Board {
     private int x;
 
     // constructeur
-    public Board() {
+    public Board(Player player1, Player player2) {
         this.x = 4;
         this.state = 6;
         this.board = new Card[this.x][this.state];
+        
+        for(int i=0;i<this.x && i<player1.getDeck().size();i++)
+            this.board[i][0]=player1.getDeck().get(i);
+        
+        for(int u=1;u<5;u++)
+            for(int i=0;i<this.x;i++)
+                this.board[i][0]=null;
+        
+        for(int i=0;i<this.x && i<player2.getDeck().size();i++)
+            this.board[i][5]=player2.getDeck().get(i);
     }
     
     // getters et setters

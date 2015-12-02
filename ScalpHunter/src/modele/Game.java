@@ -29,7 +29,7 @@ public class Game {
         this.player2 = player2;
         this.player2.setId(2);
         this.current_player = false;
-        board_game = new Board();
+        board_game = new Board(player1,player2);
     }
 
     // getters et setters

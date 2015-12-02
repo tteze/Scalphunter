@@ -17,13 +17,15 @@ public class Fenetre extends JFrame{
     VueBoard v;
     Game g;
     
-    Fenetre(Player player1,Player player2){
-        g=new Game(player1,player2);
+    public Fenetre(Game g){
+        this.g=g;
         v=new VueBoard(g.getBoardGame(),700,700);
         this.initialisation();
     }
     
     private void initialisation(){
-        //TODO
+       this.add(v);
+       this.setVisible(true);
+       this.pack();
     }
 }
