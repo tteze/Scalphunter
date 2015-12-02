@@ -19,13 +19,16 @@ public class Fenetre extends JFrame{
     
     public Fenetre(Game g){
         this.g=g;
-        v=new VueBoard(g.getBoardGame(),700,700);
+        v=new VueBoard(g.getBoardGame(),600,600);
         this.initialisation();
     }
     
     private void initialisation(){
        this.add(v);
-       this.setVisible(true);
+       this.setTitle("ScalpHunter");
        this.pack();
+       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       this.setVisible(true);
+       this.setLocationRelativeTo(null);
     }
 }

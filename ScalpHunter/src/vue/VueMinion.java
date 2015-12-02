@@ -16,7 +16,7 @@ import modele.Minion;
  *
  * @author Théophile
  */
-public class VueMinion extends JComponent{
+public class VueMinion{
     Minion m;
     int longueur;
     int largeur;
@@ -25,23 +25,17 @@ public class VueMinion extends JComponent{
         this.longueur=longueur;
         this.largeur=largeur;
     }
+    public void paint(Graphics2D p,int x,int y) {
 
-    @Override
-    public void paintComponent(Graphics p1) {
-        Graphics2D p = (Graphics2D) p1;
-        p.setBackground(Color.white);
+        p.setColor(Color.white);
+        p.fillRect(x, y, this.longueur, this.largeur);
         p.setColor(Color.black);
-        p.drawString( "Name" , 5 , 5 );
+        p.drawString( m.getName() , 5+x , 15+y );
         p.setColor(Color.blue);
-        p.drawString( "Cost" , this.longueur-20 , 5 );
+        p.drawString( ""+m.getCost() , this.longueur-10+x , 15+y );
         p.setColor(Color.red);
-        p.drawString( "Attack" , 5 , this.largeur-10 );
+        p.drawString( ""+m.getAttack() , 5+x , this.largeur-10+y );
         p.setColor(Color.green);
-        p.drawString( "Defense" , this.longueur-20 , this.largeur-10 );
-    }
-    
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(this.longueur,this.largeur);
+        p.drawString( ""+m.getDefense() , this.longueur-10+x , this.largeur-10+y );
     }
 }
