@@ -60,7 +60,14 @@ public abstract class Player {
         this.id = id;
     }
     
-
+    public void untired(){
+        for(int i=0;i<this.deck.size();i++){
+            if(this.deck.get(i).getClass()==Minion.class){
+                 ((Minion)this.deck.get(i)).setTired(true);
+            }
+        }
+    }
+    
     // fonctions
     public abstract MoveSommon Sommon();
 

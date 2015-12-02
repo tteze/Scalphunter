@@ -22,8 +22,13 @@ public class Minion extends Card {
         this.tired=false;
     }
 
-    public void Fight(Minion opponent) {
-        //TODO
+    public int Fight(Minion opponent) {
+        if(this.attack>this.defense){
+            return 1;
+        }else if(this.attack<this.defense){
+            return 2;
+        }
+        return 0;
     }
 
     public boolean isTired() {
@@ -33,6 +38,18 @@ public class Minion extends Card {
     public void setTired(boolean tired) {
         this.tired = tired;
     }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+    
+    
+    
+    
     
     
 

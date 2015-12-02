@@ -47,15 +47,23 @@ public class Board {
         this.x = x;
     }
     
+    public void remove_card(Card c, Player p){
+        for(int i=0;i<this.x;i++)
+            for(int u=0;u<this.state;u++)
+                if(this.board[i][u]==c){
+                     this.board[i][u]=null;
+                     p.getDeck().remove(c);
+                }
+    }
 
     // fonctions
     public void applyMove(Move move) {
         if(move.getClass()==MoveSommon.class){
             
         if (move.getPlayer().getResources() >= move.getCard().getCost()) {
-            for (int i = 0; i < this.getX(); i++) {
+            for (int i = 0; i < this.x; i++) {
                 if (move.getCard() == this.getBoard(i, move.myHand())) {
-                    for (int j = 0; j < this.getX(); j++) {
+                    for (int j = 0; j < this.x; j++) {
                         /*  on regarde si il y a une place disponible sur le terrain
                         */
                         if (this.getBoard(j, move.myGround()) == null) {
@@ -73,9 +81,23 @@ public class Board {
             }
         }
         }else if(move.getClass()== MoveAttack.class){
-        
+            //TODO
+            //la carte est avancée en zone de combat
         }else if(move.getClass()== MoveDefense.class){
-        
+            if(!((Minion) move.getCard()).isTired()){
+            switch(((Minion)((MoveDefense)move).getCard_attack()).Fight((Minion) move.getCard())){
+                case 0: // TODO égalité voir quoi faire
+                    
+                    break;
+                case 1: // suppression de la carte defenseur
+                    this.remove_card(move.getCard(), move.getPlayer());
+                    break;
+                case 2: // suppression de la carte attaquante
+                    this.remove_card(((MoveDefense)move).getCard_attack(), ((MoveDefense)move).getPlayer_attack());
+                    break;   
+            }
+            ((Minion)((MoveDefense)move).getCard_attack()).setTired(true);
+            }
         }
     }
 }

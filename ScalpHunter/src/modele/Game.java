@@ -114,16 +114,28 @@ public class Game {
         while ((d = player.PlayDefense(attacks)) != null) {
             this.board_game.applyMove(d);
         }
+        for(int i=0;i<attacks.size();i++){
+            if(!((Minion) attacks.get(i).getCard()).isTired()){
+                player.setHealth(player.getHealth()-((Minion) attacks.get(i).getCard()).getAttack());
+            }
+        }
     }
 
     public Player play() {
         Player winner=null;
         Player player;
-        ArrayList<MoveAttack> attacks=null;
+        ArrayList<MoveAttack> attacks = new ArrayList();
         for(int i=1;(winner=this.isEnd())==null;i++){
             this.setRound((int)i/2);
             player=nextPlayer();
-            this.defenseRound(player, attacks);
+            if(attacks.size()>0){
+                this.defenseRound(player, attacks);
+                if((winner=this.isEnd())!=null){
+                    return winner;
+                }    
+            }
+            attacks.clear();
+            player.untired();
             player.setResources(player.getResources() + this.getRound());
             this.sommonRound(player);
             attacks=this.attackRound(player);

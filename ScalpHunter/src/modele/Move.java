@@ -12,8 +12,8 @@ package modele;
 public abstract class Move {
 
     // attributs
-    Card card;
-    Player player;
+    private Card card;
+    private Player player;
 
     // constructeur
 
