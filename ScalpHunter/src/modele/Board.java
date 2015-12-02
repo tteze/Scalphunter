@@ -26,7 +26,7 @@ public class Board {
         
         for(int u=1;u<5;u++)
             for(int i=0;i<this.x;i++)
-                this.board[i][0]=null;
+                this.board[i][u]=null;
         
         for(int i=0;i<this.x && i<player2.getDeck().size();i++)
             this.board[i][5]=player2.getDeck().get(i);

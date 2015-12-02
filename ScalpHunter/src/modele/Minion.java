@@ -47,7 +47,14 @@ public class Minion extends Card {
         return defense;
     }
     
-    
+    @Override
+    public Object clone(){
+        Minion copie = (Minion) super.clone();
+        copie.attack=this.attack;
+        copie.defense=this.defense;
+        copie.tired=this.tired;
+        return copie;
+    }
     
     
     

@@ -9,7 +9,7 @@ package modele;
  *
  * @author Théophile
  */
-public abstract class Card {
+public abstract class Card implements Cloneable{
     // attributs
     private String name;
     private int cost;
@@ -37,6 +37,16 @@ public abstract class Card {
         this.cost = cost;
     }
     
-    
+    public Object clone(){
+        Card copie = null;
+        try {
+            copie = (Card) super.clone();
+        }catch(CloneNotSupportedException cnse) {
+            cnse.printStackTrace(System.err);
+        }
+        copie.name=this.name;
+        copie.cost=this.cost;
+        return copie;
+    }
 
 }
