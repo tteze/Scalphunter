@@ -13,14 +13,24 @@ public abstract class Card implements Cloneable{
     // attributs
     private String name;
     private int cost;
+    private boolean sommon;
 
     // constructeur
     public Card(String name, int cost) {
         this.name = name;
         this.cost = cost;
+        this.sommon=false;
+    }
+    
+    // getters et setters
+    public boolean isSommon() {
+        return sommon;
     }
 
-    // getters et setters
+    public void setSommon(boolean sommon) {    
+        this.sommon = sommon;
+    }
+
     public String getName() {
         return name;
     }

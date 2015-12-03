@@ -63,9 +63,54 @@ public abstract class Player {
     public void untired(){
         for(int i=0;i<this.deck.size();i++){
             if(this.deck.get(i).getClass()==Minion.class){
-                 ((Minion)this.deck.get(i)).setTired(true);
+                 ((Minion)this.deck.get(i)).setTired(false);
             }
         }
+    }
+    
+        public int myHand() {
+        if (this.getId() == 1) {
+            return 0;
+        } else {
+            return 5;
+        }
+    }
+
+    public int myGround() {
+        if (this.getId() == 1) {
+            return 1;
+        } else {
+            return 4;
+        }
+    }
+    
+    public int myFront() {
+        if (this.getId() == 1) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+    
+    public void unAttack(Board board){
+        for(int a=0;a<this.deck.size();a++)
+            if(((Minion)this.deck.get(a)).isInAttack())
+                for (int i = 0; i < board.getX(); i++) 
+                    if (this.getDeck().get(a) == board.getBoard(i,this.myFront()))
+                        for (int j = 0; j < board.getX(); j++) 
+                            /*  on regarde si il y a une place disponible sur le terrain
+                            */
+                            if (board.getBoard(j, this.myFront()) == null) {
+                                /*  Cette carte passe de la ligne terrain à la ligne front
+                                */
+                                board.setBoard(i, this.myGround(), null);
+                                board.setBoard(j, this.myFront(), this.deck.get(a));
+                                ((Minion)this.getDeck().get(a)).setInAttack(false);
+                                break;
+                            }
+                        
+                    
+                
     }
     
     // fonctions

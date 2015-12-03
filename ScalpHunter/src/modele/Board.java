@@ -5,6 +5,8 @@
  */
 package modele;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Théophile
@@ -72,18 +74,19 @@ public class Board {
             
         if (move.getPlayer().getResources() >= move.getCard().getCost()) {
             for (int i = 0; i < this.x; i++) {
-                if (move.getCard() == this.getBoard(i, move.myHand())) {
+                if (move.getCard() == this.getBoard(i, move.getPlayer().myHand())) {
                     for (int j = 0; j < this.x; j++) {
                         /*  on regarde si il y a une place disponible sur le terrain
                         */
-                        if (this.getBoard(j, move.myGround()) == null) {
+                        if (this.getBoard(j, move.getPlayer().myGround()) == null) {
                             /*  Cette carte passe de la ligne main à la ligne terrain
                             et le joueur perd le nombre de ressources correspondant
                             au coût de la carte.
                             */
-                            this.setBoard(i, move.myHand(), null);
-                            this.setBoard(j, move.myGround(), move.getCard());
+                            this.setBoard(i, move.getPlayer().myHand(), null);
+                            this.setBoard(j, move.getPlayer().myGround(), move.getCard());
                             move.getPlayer().setResources(move.getPlayer().getResources() - move.getCard().getCost());
+                            move.getCard().setSommon(true);
                             break;
                         }
                     }
@@ -91,13 +94,30 @@ public class Board {
             }
         }
         }else if(move.getClass()== MoveAttack.class){
-            //TODO
-            //la carte est avancée en zone de combat
-        }else if(move.getClass()== MoveDefense.class){
+            if(move.getCard().getClass()==Minion.class){
+                for (int i = 0; i < this.x; i++) {
+                    if (move.getCard() == this.getBoard(i, move.getPlayer().myHand())) {
+                        for (int j = 0; j < this.x; j++) {
+                            /*  on regarde si il y a une place disponible sur le terrain
+                            */
+                            if (this.getBoard(j, move.getPlayer().myFront()) == null) {
+                                /*  Cette carte passe de la ligne terrain à la ligne front
+                                */
+                                this.setBoard(i, move.getPlayer().myGround(), null);
+                                this.setBoard(j, move.getPlayer().myFront(), move.getCard());
+                                ((Minion)move.getCard()).setInAttack(true);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+          }else if(move.getClass()== MoveDefense.class){
             if(!((Minion) move.getCard()).isTired()){
             switch(((Minion)((MoveDefense)move).getCard_attack()).Fight((Minion) move.getCard())){
-                case 0: // TODO égalité voir quoi faire
-                    
+                case 0: // suppression des deux cartes
+                    this.remove_card(move.getCard(), move.getPlayer());
+                    this.remove_card(((MoveDefense)move).getCard_attack(), ((MoveDefense)move).getPlayer_attack());
                     break;
                 case 1: // suppression de la carte defenseur
                     this.remove_card(move.getCard(), move.getPlayer());
@@ -107,6 +127,7 @@ public class Board {
                     break;   
             }
             ((Minion)((MoveDefense)move).getCard_attack()).setTired(true);
+            ((Minion)((MoveDefense)move).getCard()).setTired(true);
             }
         }
     }

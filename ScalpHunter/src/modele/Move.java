@@ -37,22 +37,4 @@ public abstract class Move {
     public void setPlayer(Player player) {    
         this.player = player;
     }
-
-    // fonctions
-
-    public int myHand() {
-        if (this.player.getId() == 1) {
-            return 0;
-        } else {
-            return 5;
-        }
-    }
-
-    public int myGround() {
-        if (this.player.getId() == 1) {
-            return 1;
-        } else {
-            return 4;
-        }
-    }
 }

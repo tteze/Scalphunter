@@ -117,6 +117,7 @@ public class Game {
         for(int i=0;i<attacks.size();i++){
             if(!((Minion) attacks.get(i).getCard()).isTired()){
                 player.setHealth(player.getHealth()-((Minion) attacks.get(i).getCard()).getAttack());
+                ((Minion) attacks.get(i).getCard()).setTired(true);
             }
         }
     }
