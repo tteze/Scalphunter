@@ -26,8 +26,10 @@ public class VueMinion{
         this.largeur=largeur;
     }
     public void paint(Graphics2D p,int x,int y) {
-
-        p.setColor(Color.white);
+        if(m.isTired())
+            p.setColor(Color.ORANGE);
+        else
+            p.setColor(Color.white);
         p.fillRect(x, y, this.longueur, this.largeur);
         p.setColor(Color.black);
         p.drawString( m.getName() , 5+x , 15+y );
@@ -37,5 +39,10 @@ public class VueMinion{
         p.drawString( ""+m.getAttack() , 5+x , this.largeur-10+y );
         p.setColor(Color.green);
         p.drawString( ""+m.getDefense() , this.longueur-10+x , this.largeur-10+y );
+        if(m.isSelected()){
+            p.setColor(Color.pink);
+            p.drawRect(x+1, y+1, this.longueur-1, this.largeur-1);
+        }
+
     }
 }

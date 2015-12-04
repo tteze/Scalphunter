@@ -5,6 +5,7 @@
  */
 package modele;
 
+import controleur.Control;
 import java.util.ArrayList;
 
 /**
@@ -12,23 +13,42 @@ import java.util.ArrayList;
  * @author Théophile
  */
 public class PlayerHuman extends Player {
+    private Control c;
     public PlayerHuman(ArrayList<Card> deck, int id) {
         super(deck, id);
+        this.c=null;
+    }
+
+    public void setC(Control c) {
+        this.c = c;
     }
 
     @Override
-    public MoveAttack PlayAttack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<MoveAttack> PlayAttack(Game g) {
+        ArrayList<MoveAttack> m=new ArrayList();
+        ArrayList<Card> plays=this.c.get_cards();
+        for(int i=0;i<plays.size();i++)
+            m.add(new MoveAttack(plays.get(i),this));
+        return m;
     }
 
     @Override
-    public MoveDefense PlayDefense(ArrayList<MoveAttack> attacks) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<MoveDefense> PlayDefense(Game g,ArrayList<MoveAttack> attacks) {
+        ArrayList<MoveDefense> d=new ArrayList();
+        ArrayList<Card> plays=this.c.get_cards();
+        ArrayList<Card> targets=this.c.get_cards2();
+        for(int i=0;i<plays.size() && i<targets.size() ;i++)
+            d.add(new MoveDefense(g.getnoneCurrent_player(),targets.get(i),plays.get(i),this));
+        return d;
     }
 
     @Override
-    public MoveSommon Sommon() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<MoveSommon> Sommon(Game g) {
+        ArrayList<MoveSommon> s=new ArrayList();
+        ArrayList<Card> plays=this.c.get_cards();
+        for(int i=0;i<plays.size();i++)
+            s.add(new MoveSommon(plays.get(i),this));
+        return s;
     }
 
 }

@@ -114,9 +114,9 @@ public abstract class Player {
     }
     
     // fonctions
-    public abstract MoveSommon Sommon();
+    public abstract ArrayList<MoveSommon> Sommon(Game g);
 
-    public abstract MoveAttack PlayAttack();
+    public abstract ArrayList<MoveAttack> PlayAttack(Game g);
 
-    public abstract MoveDefense PlayDefense(ArrayList<MoveAttack> attacks);
+    public abstract ArrayList<MoveDefense> PlayDefense(Game g,ArrayList<MoveAttack> attacks);
 }

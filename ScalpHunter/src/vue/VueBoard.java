@@ -5,6 +5,7 @@
  */
 package vue;
 
+import controleur.Control;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -20,12 +21,13 @@ import modele.Minion;
  * @author Théophile
  */
 public class VueBoard extends JComponent implements MouseListener{
-    Board board;
-    VueMinion[][] minions;
-    int longueur;
-    int largeur;
+    private Board board;
+    private VueMinion[][] minions;
+    private Control c;
+    private int longueur;
+    private int largeur;
 
-    public VueBoard(Board board, int longueur, int largeur) {
+    public VueBoard(Board board, int longueur, int largeur, Control c) {
         this.board = board;
         this.longueur = longueur;
         this.largeur = largeur;
@@ -41,9 +43,15 @@ public class VueBoard extends JComponent implements MouseListener{
                 }
             }
         }
+        this.c=c;
+        addMouseListener(this);
     }
     
     
+
+    public Control getC() {
+        return c;
+    }
 
     @Override
     public void paintComponent(Graphics p1) {
@@ -60,13 +68,6 @@ public class VueBoard extends JComponent implements MouseListener{
                     p.drawRect(i*this.longueur/this.board.getX(), u*this.largeur/this.board.getState() ,this.longueur/this.board.getX(),this.largeur/this.board.getState());
             }
         }
-        /*p.setColor(Color.black);
-        for(int i=0;i<this.board.getX()+1;i++){
-            p.drawLine(i*this.longueur/this.board.getX(), 0, i*this.longueur/this.board.getX(), this.largeur);
-        }
-        for(int u=0;u<this.board.getState()+1;u++){
-            p.drawLine(0, u*this.largeur/this.board.getState(), this.longueur, u*this.largeur/this.board.getState());
-        }*/
     }
     
     @Override
@@ -76,7 +77,11 @@ public class VueBoard extends JComponent implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(int i=0;i<this.minions.length;i++)
+            if(e.getX()>=i*this.longueur/this.board.getX() && e.getX()<(i+1)*this.longueur/this.board.getX())
+                for(int u=0;u<this.minions[i].length;u++)
+                    if(e.getY()>=u*this.largeur/this.board.getState() && e.getX()<(u+1)*this.largeur/this.board.getState())
+                        c.card_clicked(this.board.getBoard(i, u));            
     }
 
     @Override

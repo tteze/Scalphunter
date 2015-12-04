@@ -5,6 +5,7 @@
  */
 package modele;
 
+import controleur.Control;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +21,7 @@ public class Game {
     private boolean current_player;
     private Board board_game;
     private int round; // TODO modifier le diagramme de classe
+    Control c;
 
     // constructeur
     public Game(Player player1, Player player2) {
@@ -30,6 +32,11 @@ public class Game {
         this.player2.setId(2);
         this.current_player = false;
         board_game = new Board(player1,player2);
+        this.c=null;
+    }
+
+    public void setC(Control c) {
+        this.c = c;
     }
 
     // getters et setters
@@ -49,8 +56,18 @@ public class Game {
         this.player2 = player2;
     }
 
-    public boolean isCurrent_player() {
-        return current_player;
+    public Player getCurrent_player() {
+        if (this.current_player) {
+            return this.player2;
+        }
+        return this.player1;
+    }
+    
+    public Player getnoneCurrent_player() {
+        if (this.current_player) {
+            return this.player1;
+        }
+        return this.player2;
     }
 
     public void setCurrent_player(boolean current_player) {
@@ -93,26 +110,27 @@ public class Game {
     }
 
     private void sommonRound(Player player) {
-        MoveSommon s = null;
-        while ((s = player.Sommon()) != null) {
-            this.board_game.applyMove(s);
+        ArrayList<MoveSommon> s=null;
+        s=player.Sommon(this);
+        for (int i=0;i<s.size();i++) {
+            this.board_game.applyMove(s.get(i));
         }
     }
 
     private ArrayList<MoveAttack> attackRound(Player player) {
-        ArrayList<MoveAttack> list_attack = null;
-        MoveAttack a = null;
-        while ((a = player.PlayAttack()) != null) {
-            this.board_game.applyMove(a);
-            list_attack.add(a);
+        ArrayList<MoveAttack> a = null;
+        a = player.PlayAttack(this);
+        for(int i=0;i<a.size();i++) {
+            this.board_game.applyMove(a.get(i));
         }
-        return list_attack;
+        return a;
     }
 
     private void defenseRound(Player player, ArrayList<MoveAttack> attacks) {
-        MoveDefense d = null;
-        while ((d = player.PlayDefense(attacks)) != null) {
-            this.board_game.applyMove(d);
+        ArrayList<MoveDefense> d = null;
+        d = player.PlayDefense(this,attacks);
+        for(int i=0;i<d.size();i++) {
+            this.board_game.applyMove(d.get(i));
         }
         for(int i=0;i<attacks.size();i++){
             if(!((Minion) attacks.get(i).getCard()).isTired()){
@@ -122,13 +140,21 @@ public class Game {
         }
     }
 
-    public Player play() {
+    private void cond_human(Player player) throws InterruptedException{
+        if(player.getClass()==PlayerHuman.class)
+            while(!c.get_continuef());
+        else
+            Thread.sleep(60000);
+    }
+    
+    public Player play() throws InterruptedException {
         Player winner=null;
         Player player;
         ArrayList<MoveAttack> attacks = new ArrayList();
         for(int i=1;(winner=this.isEnd())==null;i++){
             this.setRound((int)i/2);
             player=nextPlayer();
+            c.update();
             if(attacks.size()>0){
                 this.defenseRound(player, attacks);
                 if((winner=this.isEnd())!=null){
@@ -138,8 +164,17 @@ public class Game {
             attacks.clear();
             player.untired();
             player.setResources(player.getResources() + this.getRound());
+            c.nextround();
+            c.update();
+            this.cond_human(player);
             this.sommonRound(player);
+            c.nextround();
+            c.update();
+            this.cond_human(player);
             attacks=this.attackRound(player);
+            c.nextround();
+            c.update();
+            this.cond_human(player);
         }
         return winner;
     }
