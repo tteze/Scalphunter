@@ -40,8 +40,8 @@ public class VueMinion{
         p.setColor(Color.green);
         p.drawString( ""+m.getDefense() , this.longueur-10+x , this.largeur-10+y );
         if(m.isSelected()){
-            p.setColor(Color.pink);
-            p.drawRect(x+1, y+1, this.longueur-1, this.largeur-1);
+            p.setColor(Color.red);
+            p.drawRect(x+1, y+1, this.longueur-2, this.largeur-2);
         }
 
     }

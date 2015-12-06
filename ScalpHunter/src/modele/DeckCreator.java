@@ -23,8 +23,8 @@ public class DeckCreator {
        ArrayList<Card> deck=new ArrayList();
        Random random= new Random();
        for(int i=0;i<nb_cartes;i++)
-            deck.add(this.r.getCards().get(random.nextInt(this.r.getCards().size())));
-       return (ArrayList<Card>) deck.clone();
+            deck.add((Card) this.r.getCards().get(random.nextInt(this.r.getCards().size())).clone());
+       return (ArrayList<Card>) deck;
     }
     
     public ArrayList<Card> create_deck(int nb_cartes){

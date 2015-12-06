@@ -113,6 +113,13 @@ public abstract class Player {
                 
     }
     
+    public boolean can_attack(){
+        for(int i=0;i<this.deck.size();i++)
+            if(this.getDeck().get(i).isSommon())
+                return true;
+        return false;
+    }
+    
     // fonctions
     public abstract ArrayList<MoveSommon> Sommon(Game g);
 

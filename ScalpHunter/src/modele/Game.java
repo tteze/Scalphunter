@@ -56,7 +56,13 @@ public class Game {
         this.player2 = player2;
     }
 
-    public Player getCurrent_player() {
+    public boolean isCurrent_player() {
+        return current_player;
+    }
+
+    
+    
+    public Player getPlayer() {
         if (this.current_player) {
             return this.player2;
         }
@@ -91,7 +97,7 @@ public class Game {
     }
 
     // fonctions
-    private Player isEnd() {
+    public Player isEnd() {
         if (this.player1.getHealth() <= 0) {
             return this.player1;
         } else if (this.player2.getHealth() <= 0) {
@@ -100,7 +106,7 @@ public class Game {
         return null;
     }
 
-    private Player nextPlayer() {
+    public Player nextPlayer() {
         if (this.current_player) {
             this.current_player = false;
             return this.player1;
@@ -147,15 +153,17 @@ public class Game {
             Thread.sleep(60000);
     }
     
+    
     public Player play() throws InterruptedException {
         Player winner=null;
         Player player;
         ArrayList<MoveAttack> attacks = new ArrayList();
-        for(int i=1;(winner=this.isEnd())==null;i++){
+        for(int i=3;(winner=this.isEnd())==null;i++){
             this.setRound((int)i/2);
             player=nextPlayer();
             c.update();
             if(attacks.size()>0){
+                this.cond_human(player);
                 this.defenseRound(player, attacks);
                 if((winner=this.isEnd())!=null){
                     return winner;
@@ -163,18 +171,20 @@ public class Game {
             }
             attacks.clear();
             player.untired();
+            player.unAttack(board_game);
             player.setResources(player.getResources() + this.getRound());
             c.nextround();
             c.update();
             this.cond_human(player);
             this.sommonRound(player);
             c.nextround();
-            c.update();
-            this.cond_human(player);
-            attacks=this.attackRound(player);
+            if(player.can_attack()){
+                c.update();
+                this.cond_human(player);
+                attacks=this.attackRound(player);
+            }
             c.nextround();
             c.update();
-            this.cond_human(player);
         }
         return winner;
     }

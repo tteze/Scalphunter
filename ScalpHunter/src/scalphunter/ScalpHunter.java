@@ -17,7 +17,7 @@ public class ScalpHunter {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
        ArrayList<Card> deck1,deck2;
        DeckCreator dc=new DeckCreator();
        deck1=dc.get_random_deck(4);
@@ -26,6 +26,7 @@ public class ScalpHunter {
        Player player2=new PlayerHuman(deck2,2);
        Game g=new Game(player1,player2);
        Fenetre f=new Fenetre(g);
+       f.getG().play();
     }
 
 }

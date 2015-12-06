@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Théophile
  */
-public class Board {
+public class Board implements Cloneable{
     // attributs
     private Card[][] board;
     private int state;
@@ -96,7 +96,7 @@ public class Board {
         }else if(move.getClass()== MoveAttack.class){
             if(move.getCard().getClass()==Minion.class){
                 for (int i = 0; i < this.x; i++) {
-                    if (move.getCard() == this.getBoard(i, move.getPlayer().myHand())) {
+                    if (move.getCard() == this.getBoard(i, move.getPlayer().myGround())) {
                         for (int j = 0; j < this.x; j++) {
                             /*  on regarde si il y a une place disponible sur le terrain
                             */
@@ -130,5 +130,18 @@ public class Board {
             ((Minion)((MoveDefense)move).getCard()).setTired(true);
             }
         }
+    }
+    
+    public Object clone(){
+        Board copie = null;
+        try {
+            copie = (Board) super.clone();
+        }catch(CloneNotSupportedException cnse) {
+            cnse.printStackTrace(System.err);
+        }
+        copie.board=this.board.clone();
+        copie.state=this.state;
+        copie.x=this.x;
+        return copie;
     }
 }

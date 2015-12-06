@@ -30,8 +30,8 @@ public class Control {
     }
     
     private boolean isCardOfCP(Card c){
-        for(int i=0;i<this.f.getG().getCurrent_player().getDeck().size();i++)
-            if(this.f.getG().getCurrent_player().getDeck().get(i)==c)
+        for(int i=0;i<this.f.getG().getPlayer().getDeck().size();i++)
+            if(this.f.getG().getPlayer().getDeck().get(i)==c)
                 return true;
         return false;
     }
@@ -42,7 +42,48 @@ public class Control {
             case 0: //defense
                 if(this.isCardOfCP(c)){
                     if(c.getClass()==Minion.class){
-                        if(!((Minion)c).isTired() && !((Minion)c).isSommon()){
+                        if(!((Minion)c).isTired() && ((Minion)c).isSommon()){
+                            if(c.isSelected()){
+                                if(this.cards.size()>this.cards2.size()){
+                                    this.cards.remove(c);
+                                    c.setSelected(false);
+                                    this.update();
+                                }
+                            }else{
+                                if(this.cards.size()==this.cards2.size()){
+                                    this.cards.add(c);
+                                    c.setSelected(true);
+                                    this.update();
+                                }
+                            }
+                        }
+                    }
+                }
+                else{
+                    if(c.getClass()==Minion.class){
+                        if(!((Minion)c).isTired() && ((Minion)c).isSommon()){
+                            if(c.isSelected()){
+                                if(this.cards.size()==this.cards2.size()){
+                                    this.cards2.remove(c);
+                                    c.setSelected(false);
+                                    this.update();
+                                }
+                            }else{
+                                    if(this.cards.size()>this.cards2.size()){
+                                        this.cards2.add(c);
+                                        c.setSelected(true);
+                                        this.update();
+                                    }
+                            }
+                        }
+                    }
+                }
+                    
+                break;
+            case 1: //sommon
+                if(this.isCardOfCP(c)){
+                    if(c.getClass()==Minion.class){
+                        if(!((Minion)c).isSommon()){
                             if(c.isSelected()){
                                 this.cards.remove(c);
                                 c.setSelected(false);
@@ -55,27 +96,11 @@ public class Control {
                         }
                     }
                 }
-                else{
-                    if(c.getClass()==Minion.class){
-                        if(!((Minion)c).isTired() && !((Minion)c).isSommon()){
-                            if(c.isSelected()){
-                                this.cards2.remove(c);
-                                c.setSelected(false);
-                                this.update();
-                            }else{
-                                this.cards2.add(c);
-                                c.setSelected(true);
-                                this.update();
-                            }
-                        }
-                    }
-                }
-                    
                 break;
-            case 1: //attack
+            case 2: // attack
                 if(this.isCardOfCP(c)){
                     if(c.getClass()==Minion.class){
-                        if(!((Minion)c).isTired() && !((Minion)c).isSommon()){
+                        if(!((Minion)c).isTired() && ((Minion)c).isSommon()){
                             if(c.isSelected()){
                                 this.cards.remove(c);
                                 c.setSelected(false);
@@ -90,23 +115,7 @@ public class Control {
                     }
                 }
                 break;
-            case 2: // sommon
-                if(this.isCardOfCP(c)){
-                    if(c.getClass()==Minion.class){
-                        if(!((Minion)c).isTired() && !((Minion)c).isSommon()){
-                            if(c.isSelected()){
-                                this.cards.remove(c);
-                                c.setSelected(false);
-                                this.update();
-                            }else{
-                                this.cards.add(c);
-                                c.setSelected(true);
-                                this.update();
-                            }
-                        }
-                    }
-                }
-                break;
+                
         }
     }
     
@@ -142,7 +151,13 @@ public class Control {
     }
     
     public void update(){
-        //TODO mise à jour des labels de fenetre 
         this.f.getV().repaint();
+        this.f.update();
     }
+
+    public int getRound() {
+        return round;
+    }
+    
+    
 }

@@ -32,19 +32,8 @@ public class VueBoard extends JComponent implements MouseListener{
         this.longueur = longueur;
         this.largeur = largeur;
         this.minions= new VueMinion[this.board.getX()][this.board.getState()];
-        for(int i=0;i<this.board.getX();i++){
-            for(int u=0;u<this.board.getState();u++){
-                if(this.board.getBoard(i, u)==null){
-                    minions[i][u]=null;
-                }else{
-                    if(this.board.getBoard(i, u).getClass()==Minion.class){
-                        minions[i][u]=new VueMinion((Minion)this.board.getBoard(i, u),this.longueur/this.board.getX(),this.largeur/this.board.getState());
-                    }
-                }
-            }
-        }
         this.c=c;
-        addMouseListener(this);
+        addMouseListener((MouseListener)this);
     }
     
     
@@ -56,6 +45,17 @@ public class VueBoard extends JComponent implements MouseListener{
     @Override
     public void paintComponent(Graphics p1) {
         Graphics2D p = (Graphics2D) p1;
+        for(int i=0;i<this.board.getX();i++){
+            for(int u=0;u<this.board.getState();u++){
+                if(this.board.getBoard(i, u)==null){
+                    minions[i][u]=null;
+                }else{
+                    if(this.board.getBoard(i, u).getClass()==Minion.class){
+                        minions[i][u]=new VueMinion((Minion)this.board.getBoard(i, u),this.longueur/this.board.getX(),this.largeur/this.board.getState());
+                    }
+                }
+            }
+        }
         for(int i=0;i<this.minions.length;i++){
             for(int u=0;u<this.minions[i].length;u++){
                 if(this.minions[i][u]==null){
@@ -77,30 +77,34 @@ public class VueBoard extends JComponent implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        if(!e.equals(null))
         for(int i=0;i<this.minions.length;i++)
             if(e.getX()>=i*this.longueur/this.board.getX() && e.getX()<(i+1)*this.longueur/this.board.getX())
                 for(int u=0;u<this.minions[i].length;u++)
-                    if(e.getY()>=u*this.largeur/this.board.getState() && e.getX()<(u+1)*this.largeur/this.board.getState())
-                        c.card_clicked(this.board.getBoard(i, u));            
+                    if(e.getY()>=u*this.largeur/this.board.getState() && e.getY()<(u+1)*this.largeur/this.board.getState()){
+                        if(this.board.getBoard(i, u)!=null)
+                            c.card_clicked(this.board.getBoard(i, u));       
+                        break;
+                    }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }
