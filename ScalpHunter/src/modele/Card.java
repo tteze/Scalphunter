@@ -5,6 +5,8 @@
  */
 package modele;
 
+import java.awt.image.BufferedImage;
+
 /**
  *
  * @author Théophile
@@ -17,13 +19,15 @@ public abstract class Card implements Cloneable {
     private int cost;
     private boolean sommon;
     private boolean selected;
+    private BufferedImage image;
 
     // constructeur
-    public Card(String name, int cost) {
+    public Card(String name, int cost,BufferedImage image) {
         this.name = name;
         this.cost = cost;
         this.sommon = false;
         this.selected = false;
+        this.image=image;
     }
 
     // getters et setters
@@ -59,6 +63,12 @@ public abstract class Card implements Cloneable {
         this.selected = selected;
     }
 
+    public BufferedImage getImage() {
+        return image;
+    }
+    
+    
+
     public Object clone() {
         Card copie = null;
         try {
@@ -68,6 +78,9 @@ public abstract class Card implements Cloneable {
         }
         copie.name = this.name;
         copie.cost = this.cost;
+        copie.selected=this.selected;
+        copie.sommon=this.sommon;
+        copie.image=this.image;
         return copie;
     }
 

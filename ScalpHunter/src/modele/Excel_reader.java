@@ -5,9 +5,11 @@
  */
 package modele;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -36,7 +38,9 @@ public class Excel_reader {
                 int cost = Integer.valueOf(sheet.getCell(1, i).getContents());
                 int att = Integer.valueOf(sheet.getCell(2, i).getContents());
                 int def = Integer.valueOf(sheet.getCell(3, i).getContents());
-                cards.add(new Minion(name, cost, att, def));
+                String path=sheet.getCell(4, i).getContents();
+                BufferedImage image=ImageIO.read(new File(path));
+                cards.add(new Minion(name, cost, att, def,image));
             }
         } catch (BiffException e) {
             e.printStackTrace();

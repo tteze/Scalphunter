@@ -38,7 +38,6 @@ public class VueBoard extends JComponent implements MouseListener, MouseMotionLi
     private int longueur;
     private int largeur;
     JWindow f;
-    BufferedImage image;
 
     public VueBoard(Board board, int longueur, int largeur, Control c) throws IOException {
         this.board = board;
@@ -47,7 +46,6 @@ public class VueBoard extends JComponent implements MouseListener, MouseMotionLi
         this.minions = new VueMinion[this.board.getX()][this.board.getState()];
         this.c = c;
         this.f = null;
-        image = ImageIO.read(new File("C:\\\\Users\\\\Théophile\\\\Pictures\\\\130502_iggypop.jpg"));
         addMouseListener((MouseListener) this);
         addMouseMotionListener(this);
     }
@@ -146,8 +144,8 @@ public class VueBoard extends JComponent implements MouseListener, MouseMotionLi
                         if (this.board.getBoard(i, u) != null) {
                             try {
                                 this.f = new JWindow();
-                                f.setPreferredSize(new Dimension(100, 150));
-                                JLabel label = new JLabel(new ImageIcon(this.image));
+                                f.setPreferredSize(new Dimension(150, 200));
+                                JLabel label = new JLabel(new ImageIcon(this.board.getBoard(i, u).getImage()));
                                 f.add(label);
                                 f.pack();
                                 f.setLocation(new Point(e.getX()+25, e.getY()+25));

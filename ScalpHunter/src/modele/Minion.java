@@ -5,6 +5,8 @@
  */
 package modele;
 
+import java.awt.image.BufferedImage;
+
 /**
  *
  * @author Théophile
@@ -16,8 +18,8 @@ public class Minion extends Card {
     private boolean tired;
     private boolean inAttack;
 
-    public Minion(String name, int cost, int attack, int defense) {
-        super(name, cost);
+    public Minion(String name, int cost, int attack, int defense,BufferedImage image) {
+        super(name, cost,image);
         this.attack = attack;
         this.defense = defense;
         this.tired = false;
@@ -67,6 +69,7 @@ public class Minion extends Card {
         copie.attack = this.attack;
         copie.defense = this.defense;
         copie.tired = this.tired;
+        copie.inAttack=this.inAttack;
         return copie;
     }
 

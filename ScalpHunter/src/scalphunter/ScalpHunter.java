@@ -5,6 +5,7 @@
  */
 package scalphunter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import modele.*;
 import vue.*;
@@ -17,7 +18,7 @@ public class ScalpHunter {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
        ArrayList<Card> deck1,deck2;
        DeckCreator dc=new DeckCreator();
        deck1=dc.get_random_deck(4);
