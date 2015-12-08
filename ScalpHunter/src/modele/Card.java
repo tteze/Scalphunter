@@ -9,8 +9,10 @@ package modele;
  *
  * @author Théophile
  */
-public abstract class Card implements Cloneable{
+public abstract class Card implements Cloneable {
+
     // attributs
+
     private String name;
     private int cost;
     private boolean sommon;
@@ -20,16 +22,16 @@ public abstract class Card implements Cloneable{
     public Card(String name, int cost) {
         this.name = name;
         this.cost = cost;
-        this.sommon=false;
-        this.selected=false;
+        this.sommon = false;
+        this.selected = false;
     }
-    
+
     // getters et setters
     public boolean isSommon() {
         return sommon;
     }
 
-    public void setSommon(boolean sommon) {    
+    public void setSommon(boolean sommon) {
         this.sommon = sommon;
     }
 
@@ -56,16 +58,16 @@ public abstract class Card implements Cloneable{
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
-    
-    public Object clone(){
+
+    public Object clone() {
         Card copie = null;
         try {
             copie = (Card) super.clone();
-        }catch(CloneNotSupportedException cnse) {
+        } catch (CloneNotSupportedException cnse) {
             cnse.printStackTrace(System.err);
         }
-        copie.name=this.name;
-        copie.cost=this.cost;
+        copie.name = this.name;
+        copie.cost = this.cost;
         return copie;
     }
 

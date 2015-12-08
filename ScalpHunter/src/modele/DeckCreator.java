@@ -13,22 +13,24 @@ import java.util.Random;
  * @author Théophile
  */
 public class DeckCreator {
+
     private Excel_reader r;
-    
-    public DeckCreator(){
-       this.r=new Excel_reader();
+
+    public DeckCreator() {
+        this.r = new Excel_reader();
     }
-    
-    public ArrayList<Card> get_random_deck(int nb_cartes){
-       ArrayList<Card> deck=new ArrayList();
-       Random random= new Random();
-       for(int i=0;i<nb_cartes;i++)
+
+    public ArrayList<Card> get_random_deck(int nb_cartes) {
+        ArrayList<Card> deck = new ArrayList();
+        Random random = new Random();
+        for (int i = 0; i < nb_cartes; i++) {
             deck.add((Card) this.r.getCards().get(random.nextInt(this.r.getCards().size())).clone());
-       return (ArrayList<Card>) deck;
+        }
+        return (ArrayList<Card>) deck;
     }
-    
-    public ArrayList<Card> create_deck(int nb_cartes){
-       //TODO
-       return null;
+
+    public ArrayList<Card> create_deck(int nb_cartes) {
+        //TODO
+        return null;
     }
 }

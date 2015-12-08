@@ -20,17 +20,21 @@ public class Minion extends Card {
         super(name, cost);
         this.attack = attack;
         this.defense = defense;
-        this.tired=false;
-        this.inAttack=false;
+        this.tired = false;
+        this.inAttack = false;
     }
 
     public int Fight(Minion opponent) {
-        if(this.attack>this.defense){
+        if (this.attack > opponent.getDefense()) {
             return 1;
-        }else if(this.attack<this.defense){
+        }
+        if (this.attack < opponent.getDefense()) {
             return 2;
         }
-        return 0;
+        if (this.attack == opponent.getDefense()) {
+            return 0;
+        }
+        return -1;
     }
 
     public boolean isTired() {
@@ -56,20 +60,14 @@ public class Minion extends Card {
     public void setInAttack(boolean inAttack) {
         this.inAttack = inAttack;
     }
-    
-    
-    
+
     @Override
-    public Object clone(){
+    public Object clone() {
         Minion copie = (Minion) super.clone();
-        copie.attack=this.attack;
-        copie.defense=this.defense;
-        copie.tired=this.tired;
+        copie.attack = this.attack;
+        copie.defense = this.defense;
+        copie.tired = this.tired;
         return copie;
     }
-    
-    
-    
-    
 
 }

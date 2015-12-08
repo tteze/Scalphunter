@@ -16,14 +16,14 @@ public abstract class Move {
     private Player player;
 
     // constructeur
-
     public Move(Card card, Player player) {
         this.card = card;
         this.player = player;
     }
-    public Card getCard() {    
+
+    public Card getCard() {
         return card;
-    } 
+    }
 
     public void setCard(Card card) {
         this.card = card;
@@ -34,7 +34,7 @@ public abstract class Move {
     }
 
     // getters et setters
-    public void setPlayer(Player player) {    
+    public void setPlayer(Player player) {
         this.player = player;
     }
 }

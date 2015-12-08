@@ -10,6 +10,7 @@ package modele;
  * @author Théophile
  */
 public class MoveDefense extends Move {
+
     private Player player_attack;
     private Card card_attack;
     //constructeur
@@ -21,7 +22,6 @@ public class MoveDefense extends Move {
     }
 
     // fonctions
-
     public Card getCard_attack() {
         return card_attack;
     }
@@ -29,7 +29,5 @@ public class MoveDefense extends Move {
     public Player getPlayer_attack() {
         return player_attack;
     }
-    
-    
 
 }

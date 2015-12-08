@@ -15,5 +15,4 @@ public class MoveAttack extends Move {
         super(card, player);
     }
 
-    
 }

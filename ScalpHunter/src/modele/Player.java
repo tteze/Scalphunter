@@ -59,16 +59,16 @@ public abstract class Player {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public void untired(){
-        for(int i=0;i<this.deck.size();i++){
-            if(this.deck.get(i).getClass()==Minion.class){
-                 ((Minion)this.deck.get(i)).setTired(false);
+
+    public void untired() {
+        for (int i = 0; i < this.deck.size(); i++) {
+            if (this.deck.get(i).getClass() == Minion.class) {
+                ((Minion) this.deck.get(i)).setTired(false);
             }
         }
     }
-    
-        public int myHand() {
+
+    public int myHand() {
         if (this.getId() == 1) {
             return 0;
         } else {
@@ -83,7 +83,7 @@ public abstract class Player {
             return 4;
         }
     }
-    
+
     public int myFront() {
         if (this.getId() == 1) {
             return 2;
@@ -91,39 +91,43 @@ public abstract class Player {
             return 3;
         }
     }
-    
-    public void unAttack(Board board){
-        for(int a=0;a<this.deck.size();a++)
-            if(((Minion)this.deck.get(a)).isInAttack())
-                for (int i = 0; i < board.getX(); i++) 
-                    if (this.getDeck().get(a) == board.getBoard(i,this.myFront()))
-                        for (int j = 0; j < board.getX(); j++) 
-                            /*  on regarde si il y a une place disponible sur le terrain
-                            */
-                            if (board.getBoard(j, this.myFront()) == null) {
+
+    public void unAttack(Board board) {
+        for (int a = 0; a < this.deck.size(); a++) {
+            if (((Minion) this.deck.get(a)).isInAttack()) {
+                for (int i = 0; i < board.getX(); i++) {
+                    if (this.getDeck().get(a) == board.getBoard(i, this.myFront())) {
+                        for (int j = 0; j < board.getX(); j++) /*  on regarde si il y a une place disponible sur le terrain
+                         */ {
+                            if (board.getBoard(j, this.myGround()) == null) {
                                 /*  Cette carte passe de la ligne terrain à la ligne front
-                                */
-                                board.setBoard(i, this.myGround(), null);
-                                board.setBoard(j, this.myFront(), this.deck.get(a));
-                                ((Minion)this.getDeck().get(a)).setInAttack(false);
+                                 */
+                                board.setBoard(i, this.myFront(), null);
+                                board.setBoard(j, this.myGround(), this.deck.get(a));
+                                ((Minion) this.getDeck().get(a)).setInAttack(false);
                                 break;
                             }
-                        
-                    
-                
+                        }
+                    }
+                }
+            }
+        }
+
     }
-    
-    public boolean can_attack(){
-        for(int i=0;i<this.deck.size();i++)
-            if(this.getDeck().get(i).isSommon())
+
+    public boolean can_attack() {
+        for (int i = 0; i < this.deck.size(); i++) {
+            if (this.getDeck().get(i).isSommon()) {
                 return true;
+            }
+        }
         return false;
     }
-    
+
     // fonctions
     public abstract ArrayList<MoveSommon> Sommon(Game g);
 
     public abstract ArrayList<MoveAttack> PlayAttack(Game g);
 
-    public abstract ArrayList<MoveDefense> PlayDefense(Game g,ArrayList<MoveAttack> attacks);
+    public abstract ArrayList<MoveDefense> PlayDefense(Game g, ArrayList<MoveAttack> attacks);
 }

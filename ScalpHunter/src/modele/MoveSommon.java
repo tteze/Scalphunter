@@ -12,10 +12,9 @@ package modele;
 public class MoveSommon extends Move {
 
     // constructeur
-    public MoveSommon(Card card, Player player) {    
+    public MoveSommon(Card card, Player player) {
         super(card, player);
     }
 
     // fonctions
-
 }

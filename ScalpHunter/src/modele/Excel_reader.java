@@ -19,43 +19,40 @@ import jxl.read.biff.BiffException;
  * @author Théophile
  */
 public class Excel_reader {
-    private String path="Documents\\cards.xls";
+
+    private String path = "Documents\\cards.xls";
     ArrayList<Card> cards;
-            
-    public Excel_reader(){
-                        cards=new ArrayList();
-        		Workbook workbook = null;
-		try {
-			workbook = Workbook.getWorkbook(new File(path));
-			Sheet sheet = workbook.getSheet(0);
-			int nb_cartes= Integer.valueOf(sheet.getCell(1,1).getContents());
-			
-                        for(int i=3;i<nb_cartes+3;i++){
-                            String name=sheet.getCell(0,i).getContents();
-                            int cost=Integer.valueOf(sheet.getCell(1,i).getContents());
-                            int att=Integer.valueOf(sheet.getCell(2,i).getContents());
-                            int def=Integer.valueOf(sheet.getCell(3,i).getContents());
-                            cards.add(new Minion(name,cost,att,def));
-                        }	
-		} 
-		catch (BiffException e) {
-			e.printStackTrace();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		} 
-		finally {
-			if(workbook!=null){
-				/* On ferme le worbook pour libérer la mémoire */
-				workbook.close(); 
-			}
-		}
+
+    public Excel_reader() {
+        cards = new ArrayList();
+        Workbook workbook = null;
+        try {
+            workbook = Workbook.getWorkbook(new File(path));
+            Sheet sheet = workbook.getSheet(0);
+            int nb_cartes = Integer.valueOf(sheet.getCell(1, 1).getContents());
+
+            for (int i = 3; i < nb_cartes + 3; i++) {
+                String name = sheet.getCell(0, i).getContents();
+                int cost = Integer.valueOf(sheet.getCell(1, i).getContents());
+                int att = Integer.valueOf(sheet.getCell(2, i).getContents());
+                int def = Integer.valueOf(sheet.getCell(3, i).getContents());
+                cards.add(new Minion(name, cost, att, def));
+            }
+        } catch (BiffException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (workbook != null) {
+                /* On ferme le worbook pour libérer la mémoire */
+                workbook.close();
+            }
+        }
 
     }
 
     public ArrayList<Card> getCards() {
         return cards;
     }
-    
-    
+
 }

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class Game {
 
     // attributs
-
     private Player player1;
     private Player player2;
     private boolean current_player;
@@ -31,8 +30,8 @@ public class Game {
         this.player2 = player2;
         this.player2.setId(2);
         this.current_player = false;
-        board_game = new Board(player1,player2);
-        this.c=null;
+        board_game = new Board(player1, player2);
+        this.c = null;
     }
 
     public void setC(Control c) {
@@ -60,15 +59,13 @@ public class Game {
         return current_player;
     }
 
-    
-    
     public Player getPlayer() {
         if (this.current_player) {
             return this.player2;
         }
         return this.player1;
     }
-    
+
     public Player getnoneCurrent_player() {
         if (this.current_player) {
             return this.player1;
@@ -116,9 +113,9 @@ public class Game {
     }
 
     private void sommonRound(Player player) {
-        ArrayList<MoveSommon> s=null;
-        s=player.Sommon(this);
-        for (int i=0;i<s.size();i++) {
+        ArrayList<MoveSommon> s = null;
+        s = player.Sommon(this);
+        for (int i = 0; i < s.size(); i++) {
             this.board_game.applyMove(s.get(i));
         }
     }
@@ -126,7 +123,7 @@ public class Game {
     private ArrayList<MoveAttack> attackRound(Player player) {
         ArrayList<MoveAttack> a = null;
         a = player.PlayAttack(this);
-        for(int i=0;i<a.size();i++) {
+        for (int i = 0; i < a.size(); i++) {
             this.board_game.applyMove(a.get(i));
         }
         return a;
@@ -134,40 +131,41 @@ public class Game {
 
     private void defenseRound(Player player, ArrayList<MoveAttack> attacks) {
         ArrayList<MoveDefense> d = null;
-        d = player.PlayDefense(this,attacks);
-        for(int i=0;i<d.size();i++) {
+        d = player.PlayDefense(this, attacks);
+        for (int i = 0; i < d.size(); i++) {
             this.board_game.applyMove(d.get(i));
         }
-        for(int i=0;i<attacks.size();i++){
-            if(!((Minion) attacks.get(i).getCard()).isTired()){
-                player.setHealth(player.getHealth()-((Minion) attacks.get(i).getCard()).getAttack());
+        for (int i = 0; i < attacks.size(); i++) {
+            if (!((Minion) attacks.get(i).getCard()).isTired()) {
+                player.setHealth(player.getHealth() - ((Minion) attacks.get(i).getCard()).getAttack());
                 ((Minion) attacks.get(i).getCard()).setTired(true);
             }
         }
     }
 
-    private void cond_human(Player player) throws InterruptedException{
-        if(player.getClass()==PlayerHuman.class)
-            while(!c.get_continuef());
-        else
+    private void cond_human(Player player) throws InterruptedException {
+        if (player.getClass() == PlayerHuman.class) {
+            while (!c.get_continuef());
+        } else {
             Thread.sleep(60000);
+        }
     }
-    
-    
+
     public Player play() throws InterruptedException {
-        Player winner=null;
+        Player winner = null;
         Player player;
         ArrayList<MoveAttack> attacks = new ArrayList();
-        for(int i=3;(winner=this.isEnd())==null;i++){
-            this.setRound((int)i/2);
-            player=nextPlayer();
+        player = this.getPlayer();
+        cond_human(player);
+        for (int i = 2; (winner = this.isEnd()) == null; i++) {
+            this.setRound((int) i / 2);
             c.update();
-            if(attacks.size()>0){
+            if (attacks.size() > 0) {
                 this.cond_human(player);
                 this.defenseRound(player, attacks);
-                if((winner=this.isEnd())!=null){
+                if ((winner = this.isEnd()) != null) {
                     return winner;
-                }    
+                }
             }
             attacks.clear();
             player.untired();
@@ -178,13 +176,14 @@ public class Game {
             this.cond_human(player);
             this.sommonRound(player);
             c.nextround();
-            if(player.can_attack()){
+            if (player.can_attack()) {
                 c.update();
                 this.cond_human(player);
-                attacks=this.attackRound(player);
+                attacks = this.attackRound(player);
             }
             c.nextround();
             c.update();
+            player = nextPlayer();
         }
         return winner;
     }
