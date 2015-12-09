@@ -12,7 +12,7 @@ import java.util.Random;
  *
  * @author Théophile
  */
-public class PlayerAI extends Player {
+public class PlayerAI extends Player implements Cloneable{
 
     public PlayerAI(ArrayList<Card> deck, int id) {
         super(deck, id);
@@ -76,6 +76,12 @@ public class PlayerAI extends Player {
             }
         }
         return s;
+    }
+    
+    @Override
+    public Object clone() {
+        Player copie = (Player) super.clone();
+        return copie;
     }
 
 }

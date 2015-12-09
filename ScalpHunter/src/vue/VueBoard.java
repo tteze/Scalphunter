@@ -24,6 +24,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JWindow;
 import modele.Board;
+import modele.Card;
 import modele.Minion;
 
 /**
@@ -38,6 +39,7 @@ public class VueBoard extends JComponent implements MouseListener, MouseMotionLi
     private int longueur;
     private int largeur;
     JWindow f;
+    Card c_pointed;
 
     public VueBoard(Board board, int longueur, int largeur, Control c) throws IOException {
         this.board = board;
@@ -123,7 +125,10 @@ public class VueBoard extends JComponent implements MouseListener, MouseMotionLi
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        if (f != null) {
+            f.setVisible(false);
+            f.dispose();
+        }
     }
 
     @Override
@@ -134,7 +139,6 @@ public class VueBoard extends JComponent implements MouseListener, MouseMotionLi
     @Override
     public void mouseMoved(MouseEvent e) {
         if (f != null) {
-            f.setVisible(false);
             f.dispose();
         }
         for (int i = 0; i < this.minions.length; i++) {
@@ -145,10 +149,12 @@ public class VueBoard extends JComponent implements MouseListener, MouseMotionLi
                             try {
                                 this.f = new JWindow();
                                 f.setPreferredSize(new Dimension(150, 200));
+                                this.c_pointed=this.board.getBoard(i, u);
                                 JLabel label = new JLabel(new ImageIcon(this.board.getBoard(i, u).getImage()));
                                 f.add(label);
                                 f.pack();
-                                f.setLocation(new Point(e.getX()+25, e.getY()+25));
+ 
+                                f.setLocation(new Point(e.getX() + 200, e.getY() + 50));
                                 f.validate();
                                 f.setVisible(true);
                             } catch (Exception error) {

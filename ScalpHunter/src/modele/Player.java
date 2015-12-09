@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Théophile
  */
-public abstract class Player {
+public abstract class Player implements Cloneable{
 
     // attributs
     private int id;
@@ -123,8 +123,23 @@ public abstract class Player {
         }
         return false;
     }
+    
+    public Object clone() {
+        Player copie = null;
+        try {
+            copie = (Player) super.clone();
+        } catch (CloneNotSupportedException cnse) {
+            cnse.printStackTrace(System.err);
+        }
+        copie.deck=(ArrayList<Card>) this.deck.clone();
+        copie.health=this.health;
+        copie.id=this.id;
+        copie.resources=this.resources;
+        
+        return copie;
+    }
 
-    // fonctions
+    // fonctions abstraites
     public abstract ArrayList<MoveSommon> Sommon(Game g);
 
     public abstract ArrayList<MoveAttack> PlayAttack(Game g);

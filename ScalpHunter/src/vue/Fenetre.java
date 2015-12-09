@@ -121,8 +121,9 @@ public class Fenetre extends JFrame implements ActionListener {
         this.setTitle("ScalpHunter");
         this.pack();
         this.setDefaultLookAndFeelDecorated(true);
-        //this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
         this.setVisible(true);
         
     }

@@ -5,8 +5,12 @@
  */
 package scalphunter;
 
+import java.awt.Frame;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import modele.*;
 import vue.*;
 /**
@@ -23,11 +27,12 @@ public class ScalpHunter {
        DeckCreator dc=new DeckCreator();
        deck1=dc.get_random_deck(4);
        deck2=dc.get_random_deck(4);
-       Player player1=new PlayerHuman(deck1,1);
+       Player player1=new PlayerAI(deck1,1);
        Player player2=new PlayerHuman(deck2,2);
        Game g=new Game(player1,player2);
        Fenetre f=new Fenetre(g);
-       f.getG().play();
+       Player p=f.getG().play();
+       JOptionPane.showMessageDialog(null,"Player "+p.getId()+" wins");
+       f.dispose();
     }
-
 }

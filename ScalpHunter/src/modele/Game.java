@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Théophile
  */
-public class Game {
+public class Game implements Cloneable{
 
     // attributs
     private Player player1;
@@ -96,9 +96,9 @@ public class Game {
     // fonctions
     public Player isEnd() {
         if (this.player1.getHealth() <= 0) {
-            return this.player1;
-        } else if (this.player2.getHealth() <= 0) {
             return this.player2;
+        } else if (this.player2.getHealth() <= 0) {
+            return this.player1;
         }
         return null;
     }
@@ -147,7 +147,7 @@ public class Game {
         if (player.getClass() == PlayerHuman.class) {
             while (!c.get_continuef());
         } else {
-            Thread.sleep(60000);
+            Thread.sleep(1000);
         }
     }
 
@@ -155,8 +155,9 @@ public class Game {
         Player winner = null;
         Player player;
         ArrayList<MoveAttack> attacks = new ArrayList();
+        this.player2.setResources(1);
         player = this.getPlayer();
-        cond_human(player);
+        while (!c.get_continuef());
         for (int i = 2; (winner = this.isEnd()) == null; i++) {
             this.setRound((int) i / 2);
             c.update();
@@ -187,5 +188,20 @@ public class Game {
         }
         return winner;
     }
-
+    
+    public Object clone() {
+        Game copie = null;
+        try {
+            copie = (Game) super.clone();
+        } catch (CloneNotSupportedException cnse) {
+            cnse.printStackTrace(System.err);
+        }
+        copie.board_game=(Board) board_game.clone();
+        copie.c=null;
+        copie.current_player=this.current_player;
+        copie.player1=this.player1;
+        copie.player2=this.player2;
+        copie.round=this.round;
+        return copie;
+    }
 }
