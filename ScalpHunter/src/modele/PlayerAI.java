@@ -33,7 +33,7 @@ public class PlayerAI extends Player implements Cloneable{
             }
         }
 
-        int alea = r.nextInt(compteur);
+        int alea = r.nextInt(compteur+1);
         ArrayList<Integer> mem = new ArrayList();
         for (int i = 0; i < alea; i++) {
             int alea2;

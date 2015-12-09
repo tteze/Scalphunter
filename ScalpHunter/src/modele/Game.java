@@ -19,7 +19,7 @@ public class Game implements Cloneable{
     private Player player2;
     private boolean current_player;
     private Board board_game;
-    private int round; // TODO modifier le diagramme de classe
+    int round; // TODO modifier le diagramme de classe
     Control c;
 
     // constructeur
@@ -112,7 +112,7 @@ public class Game implements Cloneable{
         return this.player2;
     }
 
-    private void sommonRound(Player player) {
+    protected void sommonRound(Player player) {
         ArrayList<MoveSommon> s = null;
         s = player.Sommon(this);
         for (int i = 0; i < s.size(); i++) {
@@ -120,7 +120,7 @@ public class Game implements Cloneable{
         }
     }
 
-    private ArrayList<MoveAttack> attackRound(Player player) {
+    protected ArrayList<MoveAttack> attackRound(Player player) {
         ArrayList<MoveAttack> a = null;
         a = player.PlayAttack(this);
         for (int i = 0; i < a.size(); i++) {
@@ -129,7 +129,7 @@ public class Game implements Cloneable{
         return a;
     }
 
-    private void defenseRound(Player player, ArrayList<MoveAttack> attacks) {
+    protected void defenseRound(Player player, ArrayList<MoveAttack> attacks) {
         ArrayList<MoveDefense> d = null;
         d = player.PlayDefense(this, attacks);
         for (int i = 0; i < d.size(); i++) {
